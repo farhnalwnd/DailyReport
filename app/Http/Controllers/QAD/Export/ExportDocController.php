@@ -120,6 +120,4 @@ class ExportDocController extends Controller
         session(['toastMessage' => 'Data berhasil disimpan. Jumlah detail baru: ' . $jumlahItemBaru, 'toastType' => 'success']);
         return redirect()->back();
     }
-
-    // END OF FUNCTION GET DATA EXPORT
 }

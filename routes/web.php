@@ -29,6 +29,7 @@ use App\Http\Controllers\QAD\ApproverController;
 use App\Http\Controllers\QAD\CostCenterController;
 use App\Http\Controllers\QAD\CustomerInvoiceController;
 use App\Http\Controllers\QAD\EmployeeController;
+use App\Http\Controllers\QAD\Inventory\StockController;
 use App\Http\Controllers\QAD\InventoryController;
 use App\Http\Controllers\QAD\ItemController;
 use App\Http\Controllers\QAD\ProductionController;
@@ -154,6 +155,12 @@ Route::middleware('auth')->group(function () {
     /*Dashboard Route Get Filter*/
     Route::get('/bar-data', [ProductionController::class, 'getBarData']);
     Route::get('/data-filter', [ProductionController::class, 'filterData']);
+
+
+
+    //Inventory Stock
+    Route::post('getinventory/stock', [StockController::class, 'getInventoryStock'])->name('inventory.stock');
+
 });
 
 
