@@ -116,6 +116,7 @@ class UserRolePermissionSeeder extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
         $staffRole = Role::create(['name' => 'staff']);
         $userRole = Role::create(['name' => 'user']);
+        $stockerRole = Role::create(['name' => 'stocker']);
 
         // Lets give all permission to super-admin role.
         $allPermissionNames = Permission::pluck('name')->toArray();
@@ -130,6 +131,8 @@ class UserRolePermissionSeeder extends Seeder
 
         $staffRole->givePermissionTo(['view dashboard Finance']);
         $userRole->givePermissionTo(['view dashboard Sales & Marketing']);
+
+        $stockerRole->givePermissionTo(['view inventory dashboard', 'view data dashboard', 'view production dashboard', 'view sales dashboard']);
 
 
         // Let's Create User and assign Role to it.
@@ -174,5 +177,18 @@ class UserRolePermissionSeeder extends Seeder
                         ]);
 
         $staffUser->assignRole($staffRole);
+
+        $stockerUser = User::firstOrCreate([
+                            'email' => 'stocker@gmail.com',
+                        ], [
+                            'name' => 'Stocker',
+                            'nik' => 'AG44444',
+                            'email' => 'stocker@gmail.com',
+                            'password' => Hash::make('password'),
+                            'email_verified_at' => now(),
+                            'position_id' => 3
+                        ]);
+
+        $stockerUser->assignRole($stockerRole);
     }
 }

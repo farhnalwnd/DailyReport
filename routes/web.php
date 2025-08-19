@@ -159,7 +159,7 @@ Route::middleware('auth')->group(function () {
 
 
     //Inventory Stock
-    Route::post('getinventory/stock', [StockController::class, 'getInventoryStock'])->name('inventory.stock');
+    Route::get('getinventory/stock', [StockController::class, 'getInventoryStock'])->name('inventory.stock');
 
 });
 

@@ -196,7 +196,7 @@ return [
         'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
         'SEOMeta' => Artesaos\SEOTools\Facades\SEOMeta::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ])->toArray(),

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\QAD\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\DailyReport;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -77,6 +79,15 @@ class StockController extends Controller
                     'tt_total_qty' => (string) $item->tt_total_qty,
                 ];
             }
+        }
+
+        if (!empty($data)) {
+            $users = User::role('stocker')->get();
+            foreach ($users as $user){
+                DailyReport::dispatch($data, $user);
+            }
+        } else {
+            Log::warning('Tidak ada data inventaris untuk dikirim.');
         }
 
         Log::info('Inventory Stock Data:', $data);

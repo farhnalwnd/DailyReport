@@ -132,6 +132,7 @@ class DatabaseSeeder extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
         $staffRole = Role::create(['name' => 'staff']);
         $userRole = Role::create(['name' => 'user']);
+        $stockerRole = Role::create(['name' => 'stocker']);
 
         // Lets give all permission to super-admin role.
         $allPermissionNames = Permission::pluck('name')->toArray();
@@ -150,6 +151,7 @@ class DatabaseSeeder extends Seeder
 
         $superAdminRole->givePermissionTo(['view requisition', 'get data master', 'view browse requisition', 'create maintenance requisition', 'update maintenance requisition', 'delete maintenance requisition', 'print maintenance requisition']);
 
+        $stockerRole->givePermissionTo(['view inventory dashboard', 'view data dashboard', 'view production dashboard', 'view sales dashboard']);
 
         // Let's Create User and assign Role to it.
 
@@ -199,5 +201,20 @@ class DatabaseSeeder extends Seeder
                         ]);
 
         $staffUser->assignRole($staffRole);
+
+        $stockerUser = User::firstOrCreate([
+                            'email' => 'stocker@gmail.com',
+                        ], [
+                            'name' => 'Stocker',
+                            'username' => 'stocker',
+                            'nik' => 'AG4444',
+                            'email' => 'stocker@gmail.com',
+                            'password' => Hash::make('password'),
+                            'email_verified_at' => now(),
+                            'position_id' => 3,
+                            'department_id' => 1,
+                        ]);
+
+        $stockerUser->assignRole($stockerRole);
     }
 }
